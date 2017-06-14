@@ -4,9 +4,6 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 
-// Require History Schema
-var History = require("./models/History");
-
 // Create Instance of Express
 var app = express();
 // Sets an initial port. We'll use this later in our listener
@@ -33,4 +30,15 @@ db.on("error", function(err) {
 
 db.once("open", function() {
   console.log("Mongoose connection successful.");
+});
+
+app.get("/", function(req, res) {
+  res.sendFile(__dirname + "/public/index.html");
+});
+
+// -------------------------------------------------
+
+// Listener
+app.listen(PORT, function() {
+  console.log("App listening on PORT: " + PORT);
 });
